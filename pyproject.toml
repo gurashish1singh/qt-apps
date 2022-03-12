@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "qt-apps"
+version = "0.1.0"
+description = "A QT6 Application that contains who knows what."
+authors = ["Gurashish Singh <gurashigh1singh@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+PyQt6 = "^6.2.3"
+
+[tool.poetry.dev-dependencies]
+lizard = "^1.17.9"
+flake8 = "^4.0.1"
+pycodestyle = "^2.8.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
