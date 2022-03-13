@@ -2,8 +2,8 @@ from typing import Callable
 
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import (
-    QCheckBox, QComboBox, QGroupBox, QLabel, QLineEdit, QListWidget,
-    QPushButton, QRadioButton, QSpinBox,
+    QCheckBox, QComboBox, QGroupBox, QLabel, QLineEdit, QListWidget, QPushButton,
+    QRadioButton, QSpinBox,
 )
 
 

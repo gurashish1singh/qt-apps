@@ -3,14 +3,14 @@ import sys
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import (
     QApplication, QGridLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton,
-    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget
+    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget,
 )
 
-from tutorial_pf_utils import (
-    BUTTON_STYLE, CHECKBOX_STYLE, CLICKED_ME, create_button, create_check_box,
-    create_combo_box, create_group_box, create_label, create_line_edit,
-    create_list, create_radio_button, create_spin_boxes, LINE_STYLE, LIST_STYLE,
-    TABLE_STYLE, WINDOW_STYLE,
+from tutorial.tutorial_pf_utils import (
+    BUTTON_STYLE, CHECKBOX_STYLE, CLICKED_ME, LINE_STYLE, LIST_STYLE, TABLE_STYLE,
+    WINDOW_STYLE, create_button, create_check_box, create_combo_box,
+    create_group_box, create_label, create_line_edit, create_list,
+    create_radio_button, create_spin_boxes,
 )
 
 
