@@ -2,7 +2,7 @@ from functools import cached_property
 
 from PyQt6.QtWidgets import QPushButton, QGridLayout, QVBoxLayout, QWidget
 
-from apps.utilities import create_button, create_label
+from app.utilities import create_button, create_label
 
 
 class TicTacToe(QWidget):
@@ -83,6 +83,9 @@ class TicTacToe(QWidget):
                 three = self.applicable_buttons[index_3 - 1]
                 if one.text() != "" and (one.text() == two.text() == three.text()):
                     self.winner(one, two, three)
+
+        if all(not button.isEnabled() for button in self.applicable_buttons):
+            self.player.setText("DRAW! Start over!")
 
     @cached_property
     def applicable_buttons(self) -> list[QPushButton]:

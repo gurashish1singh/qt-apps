@@ -2,11 +2,14 @@ import sys
 
 from PyQt6.QtWidgets import QApplication
 
-from apps.game_factory import GameFactory
+from app.main_window import MainAppWindow
+from app.themes.themes import ELEGANT_DARK, MANJARO, MATERIAL, TESTING
 
 
 if __name__ == "__main__":
     app = QApplication([""])
-    window = GameFactory().get("tic-tac-toe")
+    # with open(TESTING, "r") as theme:
+    #     app.setStyleSheet(theme.read())
+    window = MainAppWindow()
     window.show()
     sys.exit(app.exec())
