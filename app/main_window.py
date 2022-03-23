@@ -1,7 +1,7 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
     QButtonGroup, QDockWidget, QMainWindow, QTextEdit,
-    QStackedLayout, QWidget
+    QStackedLayout, QWidget, QVBoxLayout,
 )
 
 from app.constants import MAIN_WINDOW_TITLE
@@ -34,13 +34,20 @@ class MainAppWindow(QMainWindow):
 
     def add_dock(self):
         dock = QDockWidget()
-        dock.setMinimumWidth(100)
+        dock.setFeatures(dock.DockWidgetFeature.NoDockWidgetFeatures)
+        dock.setMinimumWidth(80)
         dock.setAllowedAreas(Qt.DockWidgetArea.LeftDockWidgetArea)
         self.addDockWidget(Qt.DockWidgetArea.LeftDockWidgetArea, dock)
+        # Docks need to have a widget assigned to them
+        base_widget = QWidget()
+        dock.setWidget(base_widget)
 
         self.button_group = QButtonGroup()
+        vertical_layout = QVBoxLayout()
         for ind, label in enumerate(GAMES, start=1):
             game_button = create_button(label, label)
             self.button_group.addButton(game_button)
             self.button_group.setId(game_button, ind)
-            dock.setWidget(game_button)
+            vertical_layout.addWidget(game_button)
+        vertical_layout.addStretch()
+        base_widget.setLayout(vertical_layout)
