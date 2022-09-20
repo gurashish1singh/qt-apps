@@ -2,35 +2,73 @@ import sys
 
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import (
-    QApplication, QGridLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton,
-    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget,
+    QApplication,
+    QGridLayout,
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QPushButton,
+    QTableWidget,
+    QTableWidgetItem,
+    QVBoxLayout,
+    QWidget,
 )
 
-from tutorial.tutorial_pf_utils import (
-    BUTTON_STYLE, CHECKBOX_STYLE, CLICKED_ME, LINE_STYLE, LIST_STYLE, TABLE_STYLE,
-    WINDOW_STYLE, create_button, create_check_box, create_combo_box,
-    create_group_box, create_label, create_line_edit, create_list,
-    create_radio_button, create_spin_boxes,
+from tutorial_pf_utils import (
+    BUTTON_STYLE,
+    CHECKBOX_STYLE,
+    CLICKED_ME,
+    LINE_STYLE,
+    LIST_STYLE,
+    TABLE_STYLE,
+    WINDOW_STYLE,
+    create_button,
+    create_check_box,
+    create_combo_box,
+    create_group_box,
+    create_label,
+    create_line_edit,
+    create_list,
+    create_radio_button,
+    create_spin_boxes,
 )
+
+
+def create_application(chapter: list[int]):
+    # argv has the 1st argument as the module name
+    chapter = chapter[1]
+    # usually its sys.argv, need to read up on what it does
+    app = QApplication([""])
+    window = ChapterFactory(chapter).get()()
+    window.show()
+    sys.exit(app.exec())
 
 
 class ChapterFactory:
-    def __init__(self, chapter: int) -> None:
+    def __init__(self, chapter: str) -> None:
         self.chapter = chapter
 
     def get(self):
         CHAPTERS = {
-            1: ButtonsAndLabels, 2: LayoutManagement,
-            3: LineEdits, 4: GroupsAndRadios,
-            5: CheckBox, 6: SpinBoxing,
-            7: Tables, 8: Lists,
-            9: ComboBox
+            "1": ButtonsAndLabels,
+            "2": LayoutManagement,
+            "3": LineEdits,
+            "4": GroupsAndRadios,
+            "5": CheckBox,
+            "6": SpinBoxing,
+            "7": Tables,
+            "8": Lists,
+            "9": ComboBox,
         }
+        if self.chapter not in CHAPTERS:
+            raise KeyError(
+                f"Incorrect input: {self.chapter} provided. "
+                f"Acceptable inputs: {[*CHAPTERS.keys()]}"
+            )
         return CHAPTERS.get(self.chapter)
 
 
 class ButtonsAndLabels(QWidget):
-
     def __init__(self) -> None:
         super().__init__()
         self.setWindowTitle("Basic App")
@@ -55,7 +93,6 @@ class ButtonsAndLabels(QWidget):
 
 
 class LayoutManagement(QWidget):
-
     def __init__(self) -> None:
         super().__init__()
         self.setWindowTitle("Testing Layouts")
@@ -67,7 +104,7 @@ class LayoutManagement(QWidget):
         V_BUTTONS = {
             "yo yo": str.casefold,
             "he he": str.lower,
-            "blah": str.upper
+            "blah": str.upper,
         }
         for label, connector in V_BUTTONS.items():
             button = create_button(label, connector)
@@ -80,7 +117,7 @@ class LayoutManagement(QWidget):
         H_BUTTONS = {
             "yo yo": str.casefold,
             "he he": str.lower,
-            "blah": str.upper
+            "blah": str.upper,
         }
         for label, connector in H_BUTTONS.items():
             button = create_button(label, connector)
@@ -93,7 +130,7 @@ class LayoutManagement(QWidget):
         G_BUTTONS = {
             "ayo": (str.casefold, (0, 0)),
             "he he": (str.lower, (1, 1)),
-            "blah": (str.upper, (2, 3))
+            "blah": (str.upper, (2, 3)),
         }
         for label, (connector, where) in G_BUTTONS.items():
             button = create_button(label, connector)
@@ -107,7 +144,6 @@ class LayoutManagement(QWidget):
 
 
 class LineEdits(QWidget):
-
     def __init__(self) -> None:
         super().__init__()
         self.setWindowTitle("Line Edits!")
@@ -132,7 +168,6 @@ class LineEdits(QWidget):
 
 
 class GroupsAndRadios(QWidget):
-
     def __init__(self) -> None:
         super().__init__()
         self.setWindowTitle("Line Edits!")
@@ -142,7 +177,7 @@ class GroupsAndRadios(QWidget):
         RADIO_BUTTONS = {
             "Testing": ("Anonymous Pro Bold", 15),
             "Different": ("Cascadia Code", 16),
-            "Fonts": ("Ununtu Mono Italic", 13)
+            "Fonts": ("Ununtu Mono Italic", 13),
         }
         # Vertical Layout for buttons
         vbox = QVBoxLayout()
@@ -170,7 +205,6 @@ class GroupsAndRadios(QWidget):
 
 
 class CheckBox(QWidget):
-
     def __init__(self) -> None:
         super().__init__()
         self.setWindowTitle("Check boxes and all!")
@@ -180,7 +214,7 @@ class CheckBox(QWidget):
         CHECKBOXES = {
             "Check me Out!": ("Sansserif", 16),
             "Hola!": ("Times New Roman", 13),
-            "Hello": ("Sansserif", 14)
+            "Hello": ("Sansserif", 14),
         }
         hbox = QHBoxLayout()
         vbox = QVBoxLayout()
@@ -204,7 +238,6 @@ class CheckBox(QWidget):
 
 
 class SpinBoxing(QWidget):
-
     def __init__(self) -> None:
         super().__init__()
         self.setWindowTitle("Check boxes and all!")
@@ -232,7 +265,6 @@ class SpinBoxing(QWidget):
 
 
 class Tables(QWidget):
-
     def __init__(self) -> None:
         super().__init__()
         self.setWindowTitle("Check boxes and all!")
@@ -264,7 +296,6 @@ class Tables(QWidget):
 
 
 class Lists(QWidget):
-
     def __init__(self) -> None:
         super().__init__()
         self.setWindowTitle("Check boxes and all!")
@@ -272,9 +303,7 @@ class Lists(QWidget):
         self.setStyleSheet(WINDOW_STYLE)
 
         vbox = QVBoxLayout()
-        list_widget = create_list([
-            "Hello?", "Does this work", "Eh", "Maybe?"
-        ])
+        list_widget = create_list(["Hello?", "Does this work", "Eh", "Maybe?"])
         list_widget.setStyleSheet(LIST_STYLE)
         list_widget.clicked.connect(self.change_text)
         self.label = create_label("DOIT list")
@@ -289,7 +318,6 @@ class Lists(QWidget):
 
 
 class ComboBox(QWidget):
-
     def __init__(self) -> None:
         super().__init__()
         self.setWindowTitle("Check boxes and all!")
@@ -298,9 +326,7 @@ class ComboBox(QWidget):
 
         vbox = QVBoxLayout()
         self.label = create_label("Comboxing it!", size=12)
-        cb = create_combo_box(
-            ["blah", "more blah", ":too mch"]
-        )
+        cb = create_combo_box(["blah", "more blah", ":too mch"])
         cb.currentTextChanged.connect(self.change_text)
 
         vbox.addWidget(cb)
@@ -310,16 +336,6 @@ class ComboBox(QWidget):
     def change_text(self):
         item = self.sender().currentText()
         self.label.setText(item)
-
-
-def create_application(chapter: list[int]):
-    chapter = int(chapter[-1]) if len(chapter) == 2 \
-                else sys.exit("ERROR. Can only accept 1 argument.")
-    # usually its sys.argv, need to read up on what it does
-    app = QApplication([""])
-    window = ChapterFactory(chapter).get()()
-    window.show()
-    sys.exit(app.exec())
 
 
 if __name__ == "__main__":

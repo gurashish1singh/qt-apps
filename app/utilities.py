@@ -1,6 +1,9 @@
 from typing import Callable
 
-from PyQt6.QtWidgets import QLabel, QPushButton
+from PyQt6.QtWidgets import (
+    QLabel,
+    QPushButton,
+)
 
 
 def create_button(label: str, object_name: str = "", connector: Callable = None) -> QPushButton:

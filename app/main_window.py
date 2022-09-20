@@ -1,16 +1,20 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
-    QButtonGroup, QDockWidget, QMainWindow, QTextEdit,
-    QStackedLayout, QWidget, QVBoxLayout,
+    QButtonGroup,
+    QDockWidget,
+    QMainWindow,
+    QStackedLayout,
+    QTextEdit,
+    QVBoxLayout,
+    QWidget,
 )
 
 from app.constants import MAIN_WINDOW_TITLE
 from app.games import tictactoe
 from app.utilities import create_button
 
-GAMES = (
-    "TicTacToe",
-)
+
+GAMES = ("TicTacToe",)
 
 
 class MainAppWindow(QMainWindow):
