@@ -34,10 +34,10 @@ from tutorial_pf_utils import (
 )
 
 
-def create_application(chapter: list[int]):
+def create_application(chapter: list[str]):
     # argv has the 1st argument as the module name
     chapter = chapter[1]
-    # usually its sys.argv, need to read up on what it does
+    # usually its sys.argv, need to read up on what's the difference
     app = QApplication([""])
     window = ChapterFactory(chapter).get()()
     window.show()
@@ -48,6 +48,7 @@ class ChapterFactory:
     def __init__(self, chapter: str) -> None:
         self.chapter = chapter
 
+    # TODO: Add return type hint
     def get(self):
         CHAPTERS = {
             "1": ButtonsAndLabels,

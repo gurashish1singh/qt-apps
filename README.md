@@ -1,6 +1,6 @@
 # PYQT6 Experimentation
 
-This repo is just for playing aorund with PYQT6.
+This repo is just for playing around with PYQT6.
 
 ## Prerequisites
 

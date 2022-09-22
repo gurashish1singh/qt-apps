@@ -29,3 +29,10 @@ repos:
         entry: poetry run isort .
         language: python
         files: ".*.py"
+-   repo: local
+    hooks:
+    -   id: lizard
+        name: Running lizard from local poetry env
+        entry: poetry run lizard
+        args: ["--CCN", "8", "-a", "7", "-s", "cyclomatic_complexity"]
+        language: python

@@ -31,9 +31,20 @@ class TicTacToe(QWidget):
     }
     WINNER_STYLE = "color: #c70aba"
     WINNER_WINNER_CHICKEN_DINNER = {
-        "across": ((1, 2, 3), (4, 5, 6), (7, 8, 9)),
-        "down": ((1, 4, 7), (2, 5, 8), (3, 6, 9)),
-        "diagonal": ((1, 5, 9), (3, 5, 7)),
+        "across": (
+            (1, 2, 3),
+            (4, 5, 6),
+            (7, 8, 9),
+        ),
+        "down": (
+            (1, 4, 7),
+            (2, 5, 8),
+            (3, 6, 9),
+        ),
+        "diagonal": (
+            (1, 5, 9),
+            (3, 5, 7),
+        ),
     }
 
     def __init__(self) -> None:
@@ -70,10 +81,10 @@ class TicTacToe(QWidget):
 
     def check_winner(self) -> None:
         for _, combinations in self.WINNER_WINNER_CHICKEN_DINNER.items():
-            for index_1, index_2, index_3 in combinations:
-                one = self.applicable_buttons[index_1 - 1]
-                two = self.applicable_buttons[index_2 - 1]
-                three = self.applicable_buttons[index_3 - 1]
+            for index_one, index_two, index_three in combinations:
+                one = self.applicable_buttons[index_one - 1]
+                two = self.applicable_buttons[index_two - 1]
+                three = self.applicable_buttons[index_three - 1]
                 if one.text() != "" and (one.text() == two.text() == three.text()):
                     self.winner(one, two, three)
 
@@ -98,7 +109,7 @@ class TicTacToe(QWidget):
         self.player.setText(f"{button_one.text()} Wins!")
         self.disable_input()
 
-    def disable_input(self):
+    def disable_input(self) -> None:
         for button in self.applicable_buttons:
             button.setEnabled(False)
 
