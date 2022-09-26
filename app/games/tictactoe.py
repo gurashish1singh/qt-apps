@@ -1,17 +1,23 @@
 from functools import cached_property
 
-from PyQt6.QtWidgets import QPushButton, QGridLayout, QVBoxLayout, QWidget
+from PyQt6.QtWidgets import (
+    QGridLayout,
+    QPushButton,
+    QVBoxLayout,
+    QWidget,
+)
 
-from app.utilities import create_button, create_label
+from app.utilities import (
+    create_button,
+    create_label,
+)
 
 
 class TicTacToe(QWidget):
 
     RESET_LABEL_STATE = "X goes first"
     START_OVER = "Start Over"
-    START_OVER_STYLE = (
-        "color: #080307"
-    )
+    START_OVER_STYLE = "color: #080307"
     TAC_BUTTONS = {
         "1": (0, 0),
         "2": (0, 1),
@@ -23,24 +29,22 @@ class TicTacToe(QWidget):
         "8": (2, 1),
         "9": (2, 2),
     }
-    WINNER_STYLE = (
-        "color: #c70aba"
-    )
+    WINNER_STYLE = "color: #c70aba"
     WINNER_WINNER_CHICKEN_DINNER = {
         "across": (
             (1, 2, 3),
             (4, 5, 6),
-            (7, 8, 9)
+            (7, 8, 9),
         ),
         "down": (
             (1, 4, 7),
             (2, 5, 8),
-            (3, 6, 9)
+            (3, 6, 9),
         ),
         "diagonal": (
             (1, 5, 9),
-            (3, 5, 7)
-        )
+            (3, 5, 7),
+        ),
     }
 
     def __init__(self) -> None:
@@ -77,10 +81,10 @@ class TicTacToe(QWidget):
 
     def check_winner(self) -> None:
         for _, combinations in self.WINNER_WINNER_CHICKEN_DINNER.items():
-            for index_1, index_2, index_3 in combinations:
-                one = self.applicable_buttons[index_1 - 1]
-                two = self.applicable_buttons[index_2 - 1]
-                three = self.applicable_buttons[index_3 - 1]
+            for index_one, index_two, index_three in combinations:
+                one = self.applicable_buttons[index_one - 1]
+                two = self.applicable_buttons[index_two - 1]
+                three = self.applicable_buttons[index_three - 1]
                 if one.text() != "" and (one.text() == two.text() == three.text()):
                     self.winner(one, two, three)
 
@@ -90,18 +94,22 @@ class TicTacToe(QWidget):
     @cached_property
     def applicable_buttons(self) -> list[QPushButton]:
         applicable_buttons = [
-            button for button in self.children() if isinstance(button, QPushButton) and button.text() != self.START_OVER
+            button
+            for button in self.children()
+            if isinstance(button, QPushButton) and button.text() != self.START_OVER
         ]
         return applicable_buttons
 
-    def winner(self, button_one: QPushButton, button_two: QPushButton, button_three: QPushButton) -> None:
+    def winner(
+        self, button_one: QPushButton, button_two: QPushButton, button_three: QPushButton
+    ) -> None:
         button_one.setStyleSheet(self.WINNER_STYLE)
         button_two.setStyleSheet(self.WINNER_STYLE)
         button_three.setStyleSheet(self.WINNER_STYLE)
         self.player.setText(f"{button_one.text()} Wins!")
         self.disable_input()
 
-    def disable_input(self):
+    def disable_input(self) -> None:
         for button in self.applicable_buttons:
             button.setEnabled(False)
 

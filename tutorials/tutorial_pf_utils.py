@@ -2,32 +2,25 @@ from typing import Callable
 
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import (
-    QCheckBox, QComboBox, QGroupBox, QLabel, QLineEdit, QListWidget, QPushButton,
-    QRadioButton, QSpinBox,
+    QCheckBox,
+    QComboBox,
+    QGroupBox,
+    QLabel,
+    QLineEdit,
+    QListWidget,
+    QPushButton,
+    QRadioButton,
+    QSpinBox,
 )
 
 
-BUTTON_STYLE = (
-    "background-color: #befef4"
-)
-CHECKBOX_STYLE = (
-    "background-color: #7951fb"
-)
-CLICKED_ME = (
-    "background-color: #e9dc67"
-)
-LINE_STYLE = (
-    "background-color: #dafbf3"
-)
-LIST_STYLE = (
-    "background-color: #bedcfe"
-)
-TABLE_STYLE = (
-    "background-color: #887ccb"
-)
-WINDOW_STYLE = (
-    "background-color: #3ea8fe"
-)
+BUTTON_STYLE = "background-color: #befef4"
+CHECKBOX_STYLE = "background-color: #7951fb"
+CLICKED_ME = "background-color: #e9dc67"
+LINE_STYLE = "background-color: #dafbf3"
+LIST_STYLE = "background-color: #bedcfe"
+TABLE_STYLE = "background-color: #887ccb"
+WINDOW_STYLE = "background-color: #3ea8fe"
 
 
 def create_button(label: str, connector: Callable) -> QPushButton:
